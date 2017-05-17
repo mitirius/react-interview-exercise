@@ -3,16 +3,22 @@ import styles from './FriendList.css';
 import FriendListItem from './FriendListItem';
 
 class FriendList extends Component {
-  render () {
+
+  state = {firstIndex: 0}
+  
+render() {
+     const friends = this.props.friends.slice(this.state.firstIndex, 100);
+
     return (
       <ul className={styles.friendList}>
         {
-          this.props.friends.map((friend, index) => {
+          friends.map((friend, index) => {
             return (
               <FriendListItem
                 key={index}
                 id={index}
                 name={friend.name}
+                gender={friend.gender}           
                 starred={friend.starred}
                 {...this.props.actions} />
             );

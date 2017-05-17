@@ -18,7 +18,12 @@ class FriendListApp extends Component {
 
     return (
       <div className={styles.friendListApp}>
-        <h1>The FriendList</h1>
+
+        <h1>
+        <span className="glyphicon glyphicon-menu-left"></span>
+         The FriendList
+        <span className="glyphicon glyphicon-menu-right"></span>
+        </h1>
         <AddFriendInput addFriend={actions.addFriend} />
         <FriendList friends={friendsById} actions={actions} />
       </div>

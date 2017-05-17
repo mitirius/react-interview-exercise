@@ -4,3 +4,14 @@
   border-left: 0;
   border-right: 0;
 }
+
+.radios {
+	padding-left: 1em;
+	background: rgb(240,240,240);
+	border-bottom: 1px solid #ABAAAA;
+}
+
+
+.btn {
+	float: right;
+}
