@@ -1,38 +1,32 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './FriendList.css';
 import FriendListItem from './FriendListItem';
+import { INC_COUNT } from '../constants/ActionTypes'
+
 
 class FriendList extends Component {
 
-  state = {firstIndex: 0}
-  
-render() {
-     const friends = this.props.friends.slice(this.state.firstIndex, 100);
+    render() {
+        const startIndex = this.props.startIndex;
+        const friends = this.props.friends.slice(startIndex, startIndex + INC_COUNT);
 
-    return (
-      <ul className={styles.friendList}>
-        {
-          friends.map((friend, index) => {
-            return (
-              <FriendListItem
-                key={index}
-                id={index}
-                name={friend.name}
-                gender={friend.gender}           
-                starred={friend.starred}
-                {...this.props.actions} />
+        return (
+            <ul className={ styles.friendList }>
+              { friends.map((friend, index) => {
+                    return (
+                        <FriendListItem key={ index } id={ index } name={ friend.name } gender={ friend.gender } starred={ friend.starred } {...this.props.actions}
+                        />
+                        );
+                }) }
+            </ul>
             );
-          })
-        }
-      </ul>
-    );
-  }
+    }
 
 }
 
 FriendList.propTypes = {
-  friends: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+    friends: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired
 };
 
 export default FriendList;

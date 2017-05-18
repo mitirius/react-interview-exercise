@@ -2,32 +2,29 @@ import React, { Component } from 'react';
 import styles from './FriendListApp.css';
 import { connect } from 'react-redux';
 
-import {addFriend, deleteFriend, starFriend} from '../actions/FriendsActions';
+import { addFriend, deleteFriend, starFriend, prevFriend, nextFriend } from '../actions/FriendsActions';
 import { FriendList, AddFriendInput } from '../components';
 
 class FriendListApp extends Component {
 
-  render () {
-    const { friendlist: { friendsById }} = this.props;
+  render() {
+    const {friendlist: {startIndex, friendsById}} = this.props;
 
     const actions = {
       addFriend: this.props.addFriend,
       deleteFriend: this.props.deleteFriend,
-      starFriend: this.props.starFriend
+      starFriend: this.props.starFriend,
+      nextFriend: this.props.nextFriend,
+      prevFriend: this.props.prevFriend,
     };
 
     return (
-      <div className={styles.friendListApp}>
-
-        <h1>
-        <span className="glyphicon glyphicon-menu-left"></span>
-         The FriendList
-        <span className="glyphicon glyphicon-menu-right"></span>
-        </h1>
-        <AddFriendInput addFriend={actions.addFriend} />
-        <FriendList friends={friendsById} actions={actions} />
+      <div className={ styles.friendListApp }>
+        <h1><span className="glyphicon glyphicon-menu-left" onClick={ actions.prevFriend } />The FriendList<span className="glyphicon glyphicon-menu-right" onClick={ actions.nextFriend } /></h1>
+        <AddFriendInput addFriend={ actions.addFriend } />
+        <FriendList friends={ friendsById } actions={ actions } startIndex={ startIndex } />
       </div>
-    );
+      );
   }
 }
 
@@ -38,5 +35,7 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   addFriend,
   deleteFriend,
-  starFriend
+  starFriend,
+  prevFriend,
+  nextFriend,
 })(FriendListApp)

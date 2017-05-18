@@ -21,3 +21,18 @@ export function starFriend(id) {
     id
   };
 }
+
+export function nextFriend(list) {
+  return {
+    type: types.NEXT_FRIENDS,
+    count: types.INC_COUNT,
+    list
+  };
+}
+
+export function prevFriend() {
+  return {
+    type: types.PREV_FRIENDS,
+    count: types.INC_COUNT
+  };
+}

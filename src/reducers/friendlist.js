@@ -1,6 +1,7 @@
 import * as types from '../constants/ActionTypes';
 
 const initialState = {
+  startIndex: 0,
   friendsById: [
     {
       name: 'Theodore Roosevelt',
@@ -44,6 +45,28 @@ export default function friends(state = initialState, action) {
         friendsById: friends
       };
 
+    case types.NEXT_FRIENDS: {
+      const startIndex = state.startIndex + action.count;
+      if (startIndex < state.friendsById.length) {
+        return {
+          ...state,
+          startIndex
+        }
+      } else {
+        return state;
+      }
+    }
+    case types.PREV_FRIENDS: {
+      const startIndex = state.startIndex - action.count;
+      if (startIndex >= 0) {
+        return {
+          ...state,
+          startIndex
+        }
+      } else {
+        return state;
+      }
+    }
     default:
       return state;
   }
